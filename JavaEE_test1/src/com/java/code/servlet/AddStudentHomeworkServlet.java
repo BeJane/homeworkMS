@@ -27,6 +27,7 @@ public class AddStudentHomeworkServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         StudentHomework sh = new StudentHomework();
+        String message;
         /*浏览器提交的数据在提交给服务器之前设置编码方式为UTF-8*/
         req.setCharacterEncoding("UTF-8");
         // 赋值
@@ -34,7 +35,12 @@ public class AddStudentHomeworkServlet extends HttpServlet {
         sh.setStudentId(Long.parseLong(req.getParameter("s_id")));
         sh.setHomeworkTitle(req.getParameter("title"));
         sh.setHomeworkContent(req.getParameter("content"));
-        StudentHomeworkJdbc.addStudentHomework(sh);
+        if(StudentHomeworkJdbc.addStudentHomework(sh)){
+            message ="提交成功";
+        }else {
+            message="提交失败";
+        }
+        req.getSession().setAttribute("message", message);
         resp.sendRedirect("homework");
     }
 }

@@ -10,22 +10,35 @@
 <html>
   <head>
     <title>提交作业</title>
+      <link rel="stylesheet" href="css/demo.css" type="text/css" media="all" />
   </head>
   <body align="center">
   提交作业
 
-<br>
-<form action="/addStudentHomework" method="POST">
-    学生学号：<input type="text" name="s_id">
-    <br />
-    作业编号: <input type="text" name="id" readonly value="<%=request.getParameter("id")%>">
-    <br />
+<br><br>
+<form action="/addStudentHomework" align="left" method="POST">
+    <p class="homework_id">
+        <label >作业编号</label>
+         <input type="text" name="id" readonly value="<%=request.getParameter("id")%>">
+    </p>
+    <p class="s_id">
+        <label>学生学号</label>
+        <input type="text" name="s_id">
+    </p>
 
-    作业题目：<input type="text" name="title">
-    <br />
+    <p class="title">
+        <label>作业题目</label>
+        <input type="text" name="title">
+    </p>
+    <p class="content">
+        <label>作业内容</label>
+        <textarea name="content"></textarea>
+    </p>
+    <p class="submit">
 
-    作业内容：<input type="text" name="content" size="60"/>
     <input type="submit" value="提交" />
+    </p>
 </form>
+
   </body>
 </html>

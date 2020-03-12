@@ -34,12 +34,19 @@ public class AddStudentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Student stu = new Student();
+        String message;
         /*浏览器提交的数据在提交给服务器之前设置编码方式为UTF-8*/
         req.setCharacterEncoding("UTF-8");
         // 赋值
         stu.setId(Long.parseLong(req.getParameter("id")));
         stu.setName(req.getParameter("name"));
-        StudentJdbc.addStudent(stu);
-        resp.sendRedirect("addStudent");
+        if(StudentJdbc.addStudent(stu)){
+            message="提交成功";
+        }else{
+            message="提交失败";
+        }
+
+        req.getSession().setAttribute("message", message);
+        resp.sendRedirect("addStudent_t.jsp");
     }
 }

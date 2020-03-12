@@ -7,27 +7,33 @@
   Date: 2020/3/9
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
   <head>
       <title>作业管理系统(教师版）</title>
+      <link rel="stylesheet" href="css/demo.css" type="text/css" media="all" />
   </head>
   <body align="center" >
   作业管理系统(教师版)
   <br>
   <br>
 添加学生
+  &nbsp;
 
+  <a href="homework_t.jsp">返回</a>
 <br>
-
-
 <form action="/addStudent" method="POST">
-    学生学号：<input type="text" name="id">
-    <br><br />
-    学生姓名：<input type="text" name="name" />
-    <br>
-    <input type="submit" value="提交" />
-    &nbsp;
-    <a href="homework_t.jsp">返回</a>
+    <p class="studentId">
+    <label>学生学号</label>
+    <input type="text" name="id">
+    </p>
+    <p class="name">
+        <label>学生姓名</label>
+        <input type="text" name="name" />
+    </p>
+   <p class="submit">
+       <input type="submit" value="提交" />
+      </p>
 </form>
 <br>
   学生名单

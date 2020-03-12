@@ -9,20 +9,25 @@
 <html>
   <head>
     <title>作业管理系统（教师版）</title>
+      <link rel="stylesheet" href="css/demo.css" type="text/css" media="all" />
   </head>
   <body align = "center">
   作业管理系统（教师版）
   <br>
   创建新作业
-
-<br><br>
-<form action="/addHomework" method="POST">
-
-    作业题目：<input type="text" name="title">
-    <br /><br />
-    作业内容：<input type="text" name="content" />
-    <br><br>
-    <input type="submit" value="提交" />
-</form>
+  <br>
+  <form action="/addHomework" align="center" method="POST">
+      <p class="title">
+          <label >作业题目</label>
+          <input type="text" name="title">
+      </p>
+      <p class="content">
+          <label>作业内容</label>
+          <textarea name="content"></textarea>
+      </p>
+      <p class="submit">
+          <input type="submit" value="添加" />
+      </p>
+  </form>
   </body>
 </html>

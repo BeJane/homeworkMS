@@ -11,16 +11,31 @@
 <html>
 <head>
     <title>作业管理系统(教师版）</title>
+    <link rel="stylesheet" href="css/demo.css" type="text/css" media="all" />
 </head>
 <body align="center" >
 作业管理系统(教师版)
-&nbsp;
-<br>
-<br>
-学生作业列表
-&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
 <a href="homework_t.jsp">返回</a>
-<br/>
+<br>
+<br>
+<form action="/studentHomework" align="left" method="POST">
+    <p class="homework_id">
+        <label >作业编号</label>
+        <input type="text" name="homeworkId"  value="<%=request.getParameter("id")%>">
+    </p>
+    <p class="s_id">
+        <label>学生学号</label>
+        <input type="text" name="studentId">
+    </p>
+    <p class="submit">
+        <input type="submit" value="查询" />
+    </p>
+</form>
+<br><br>
+学生作业列表
+
+<br> <br/>
 <table align="center" width="960" border="1"
        bgcolor="black" cellpadding="1" cellspacing="1">
     <tr align="center" bgcolor="#7fffd4" height="50">

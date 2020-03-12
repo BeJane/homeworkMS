@@ -12,17 +12,8 @@ import java.util.List;
  * @date: 2020/3/9
  */
 public class StudentHomeworkJdbc {
-    public static void main(String[] args) {
-        List<StudentHomework> list;
-        list = IdSelect(1);
 
-        for (StudentHomework sh : list){
-            System.out.println(sh.getHomeworkContent());
-        }
-
-    }
-
-    public static void addStudentHomework(StudentHomework sh) {
+    public static boolean addStudentHomework(StudentHomework sh) {
         String url = "jdbc:mysql://127.0.0.1:3306/school";
         String allUrl = url+"?user=root&password=123456&useSSL=false";
         String sqlString = "INSERT INTO s_student_homework" +
@@ -40,6 +31,7 @@ public class StudentHomeworkJdbc {
         } catch (SQLException e){
             e.printStackTrace();
         }
+        return true;
     }
 
     public static List<StudentHomework> selectAll(){
@@ -71,10 +63,40 @@ public class StudentHomeworkJdbc {
         return list;
     }
 
-    public static List<StudentHomework> IdSelect(long id){
+    public static List<StudentHomework> select(long homeworkId){
         String url = "jdbc:mysql://127.0.0.1:3306/school";
         String allUrl = url+"?user=root&password=123456&useSSL=false";
-        String sqlString = "SELECT * FROM s_student_homework WHERE homework_id = '"+id+"'";
+        String sqlString = "SELECT * FROM s_student_homework WHERE homework_id = '"+homeworkId+"'";
+
+        List<StudentHomework> list = new ArrayList<>();
+        try(Connection connection = DriverManager.getConnection(allUrl)){
+
+            try(Statement statement = connection.createStatement()){
+                try(ResultSet resultSet = statement.executeQuery(sqlString)){
+                    while (resultSet.next()){
+                        StudentHomework sh = new StudentHomework();
+                        sh.setId(resultSet.getLong("id"));
+                        sh.setStudentId(resultSet.getLong("student_id"));
+                        sh.setHomeworkId(resultSet.getLong("homework_id"));
+                        sh.setHomeworkTitle(resultSet.getString("homework_title"));
+                        sh.setHomeworkContent(resultSet.getString("homework_content"));
+                        sh.setCreateTime(resultSet.getTimestamp("create_time"));
+
+                        list.add(sh);
+                    }
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<StudentHomework> select(long homeworId,long studentId){
+        String url = "jdbc:mysql://127.0.0.1:3306/school";
+        String allUrl = url+"?user=root&password=123456&useSSL=false";
+        String sqlString = "SELECT * FROM s_student_homework WHERE homework_id = '"
+                +homeworId+"' and student_id = '" + studentId + "'";
 
         List<StudentHomework> list = new ArrayList<>();
         try(Connection connection = DriverManager.getConnection(allUrl)){

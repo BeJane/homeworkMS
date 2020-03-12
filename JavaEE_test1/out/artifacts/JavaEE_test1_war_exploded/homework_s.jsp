@@ -9,6 +9,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String mess=(String)session.getAttribute("message");
+    if(mess == null | "".equals(mess)){
+
+    }
+
+    else{%>
+<script type="text/javascript">
+    alert("<%=mess%>");
+</script>
+
+<% }%>
 <html>
   <head>
     <title>作业管理系统(学生版）</title>
@@ -32,6 +44,7 @@
             <td>创建时间</td>
             <td>操作</td>
         </tr>
+
         <%
             List<Homework> list = HomeworkJdbc.selectAll();
             if(null == list || list.size() <= 0){

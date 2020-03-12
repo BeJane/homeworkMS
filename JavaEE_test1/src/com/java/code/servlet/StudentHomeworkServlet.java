@@ -22,9 +22,9 @@ import java.util.List;
 public class StudentHomeworkServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
+        Long homeworkId = Long.parseLong(req.getParameter("id"));
         List<StudentHomework> list;
-        list = StudentHomeworkJdbc.IdSelect(id);
+        list = StudentHomeworkJdbc.select(homeworkId);
 
         req.setAttribute("list", list);
 
@@ -34,11 +34,14 @@ public class StudentHomeworkServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
-        List<StudentHomework> list = StudentHomeworkJdbc.IdSelect(id);
+        Long homeworkId = Long.parseLong(req.getParameter("homeworkId"));
+        Long studentId = Long.parseLong(req.getParameter("studentId"));
+        List<StudentHomework> list;
+        list = StudentHomeworkJdbc.select(homeworkId,studentId);
 
         req.setAttribute("list", list);
 
         req.getRequestDispatcher("studentHomework.jsp").forward(req, resp);
+
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class HomeworkJdbc {
 
-    public static void addHomework(Homework h) {
+    public static boolean addHomework(Homework h) {
         String url = "jdbc:mysql://127.0.0.1:3306/school";
         String allUrl = url+"?user=root&password=123456&useSSL=false";
         String sqlString = "INSERT INTO s_homework (title,content,create_time) VALUES ('"
@@ -30,6 +30,7 @@ public class HomeworkJdbc {
         } catch (SQLException e){
             e.printStackTrace();
         }
+        return true;
     }
 
     public static List<Homework> selectAll(){

@@ -13,13 +13,7 @@ import java.util.List;
  */
 public class StudentJdbc {
 
-    public static void main(String[] args) {
-        Student stu = new Student();
-        stu.setId(122);
-        stu.setName("Jane");
-        addStudent(stu);
-    }
-    public static void addStudent(Student stu) {
+    public static boolean addStudent(Student stu) {
         String url = "jdbc:mysql://127.0.0.1:3306/school";
         String allUrl = url+"?user=root&password=123456&useSSL=false";
         String sqlString = "INSERT INTO s_student (id,name,create_time) VALUES ('"
@@ -35,6 +29,7 @@ public class StudentJdbc {
         } catch (SQLException e){
             e.printStackTrace();
         }
+        return true;
     }
 
     public static List<Student> selectAll(){
