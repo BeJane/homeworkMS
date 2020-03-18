@@ -37,7 +37,9 @@
             <td>操作</td>
         </tr>
         <%
-            List<Homework> list = HomeworkJdbc.selectAll();
+            HomeworkJdbc homeworkJdbc = new HomeworkJdbc();
+            List<Homework> list = homeworkJdbc.selectAll();
+            homeworkJdbc.free();
             if(null == list || list.size() <= 0){
                 out.print("None data");
             }else{

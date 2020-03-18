@@ -24,8 +24,10 @@ public class StudentHomeworkServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long homeworkId = Long.parseLong(req.getParameter("id"));
         List<StudentHomework> list;
-        list = StudentHomeworkJdbc.select(homeworkId);
+        StudentHomeworkJdbc studentHomeworkJdbc = new StudentHomeworkJdbc();
+        list = studentHomeworkJdbc.select(homeworkId);
 
+        studentHomeworkJdbc.free();
         req.setAttribute("list", list);
 
         req.getRequestDispatcher("studentHomework.jsp").forward(req, resp);
@@ -37,7 +39,9 @@ public class StudentHomeworkServlet extends HttpServlet {
         Long homeworkId = Long.parseLong(req.getParameter("homeworkId"));
         Long studentId = Long.parseLong(req.getParameter("studentId"));
         List<StudentHomework> list;
-        list = StudentHomeworkJdbc.select(homeworkId,studentId);
+        StudentHomeworkJdbc studentHomeworkJdbc = new StudentHomeworkJdbc();
+        list = studentHomeworkJdbc.select(homeworkId,studentId);
+        studentHomeworkJdbc.free();
 
         req.setAttribute("list", list);
 

@@ -47,7 +47,7 @@
           <td>创建时间</td>
       </tr>
       <%
-          List<Student> list = StudentJdbc.selectAll();
+          List<Student> list = (List<Student>) request.getAttribute("list");
           if(null == list || list.size() <= 0){
               out.print("None data");
           }else{

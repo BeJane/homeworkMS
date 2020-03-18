@@ -46,7 +46,7 @@
         </tr>
 
         <%
-            List<Homework> list = HomeworkJdbc.selectAll();
+            List<Homework> list = (List<Homework>) request.getAttribute("list");
             if(null == list || list.size() <= 0){
                 out.print("None data");
             }else{
