@@ -34,11 +34,14 @@ public class StudentJdbc {
 
          */
 
-        try(Statement statement = connection.prepareStatement(
-                "INSERT INTO s_student (id,name,create_time) VALUES (?,?,NOW())"
-        )){
-            ((PreparedStatement) statement).setLong(1,stu.getId());
-            ((PreparedStatement) statement).setString(2,stu.getName());
+        try{
+            PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO s_student (id,name,create_time) VALUES (?,?,NOW())");
+            statement.setLong(1,stu.getId());
+            statement.setString(2,stu.getName());
+            // 执行更新操作
+            statement.executeUpdate();
+            statement.close();
 
         } catch (SQLException e){
             e.printStackTrace();

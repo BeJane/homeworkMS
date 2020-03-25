@@ -32,16 +32,13 @@ public class HomeworkJdbc {
     }
     public boolean addHomework(Homework h)  {
 
-        try(Statement statement = connection.prepareStatement(
+        try(PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO s_homework (title,content,create_time) VALUES (?,?,NOW())")){
-            //String sqlString = "INSERT INTO s_homework (title,content,create_time) VALUES ('"
-            //        +h.getTitle()+"','"+h.getContent()+"',NOW())";
 
-            if(h.getTitle() != null && h.getContent() != null){
+            statement.setString(1,h.getTitle());
+            statement.setString(2,h.getContent());
 
-                ((PreparedStatement) statement).setString(1,h.getTitle());
-                ((PreparedStatement) statement).setString(2,h.getContent());
-            }
+            statement.executeUpdate();
 
         }catch(SQLException e){
             e.printStackTrace();

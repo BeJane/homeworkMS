@@ -37,16 +37,18 @@ public class StudentHomeworkJdbc {
                 +"','"+sh.getHomeworkContent()+"',NOW())";
 
          */
-        try(Statement statement = connection.prepareStatement(
+        try(PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO s_student_homework" +
                 " (student_id,homework_id,homework_title,homework_content,create_time) VALUES (?,?,?,?,NOW())"
         )){
 
-            ((PreparedStatement) statement).setLong(1,sh.getStudentId());
-            ((PreparedStatement) statement).setLong(2,sh.getHomeworkId());
-            ((PreparedStatement) statement).setString(3,sh.getHomeworkTitle());
+            statement.setLong(1,sh.getStudentId());
+            statement.setLong(2,sh.getHomeworkId());
+            statement.setString(3,sh.getHomeworkTitle());
 
-            ((PreparedStatement) statement).setString(4,sh.getHomeworkContent());
+            statement.setString(4,sh.getHomeworkContent());
+            // 执行更新操作
+            statement.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
         }
