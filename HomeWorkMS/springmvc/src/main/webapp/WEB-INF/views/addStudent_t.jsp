@@ -52,9 +52,9 @@
           <ul>
               <c:forEach var="student" items="${list}" varStatus="loop">
       <tr>
-          <td>${student.id}</td>
-          <td>${student.name}</td>
-          <td>${student.create_time}</td>
+          <td>${student.get("id")}</td>
+          <td>${student.get("name")}</td>
+          <td>${student.get("create_time")}</td>
       </tr>
                   </c:forEach>
           </ul>

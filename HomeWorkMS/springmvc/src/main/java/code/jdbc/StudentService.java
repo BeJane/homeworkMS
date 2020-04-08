@@ -47,6 +47,7 @@ public class StudentService {
 
         Map list = jdbcTemplate.queryForMap(sqlString);
 
+        System.out.println(list.toString());
         return list;
     }
 }

@@ -28,7 +28,7 @@
 <body align="center" >
 作业管理系统(学生版)
 &nbsp;
-<a href="homework_t.jsp">切换教师版</a>
+<a href="homework_t">切换教师版</a>
 <br>
 <br>
 作业列表
