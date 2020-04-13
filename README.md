@@ -1,5 +1,6 @@
 ## HomeWorkMS
-maven: projec/module
+maven: project/module
+spring MVC
 ## JavaEE_test1
 servlet+jdbc+jsp
 
