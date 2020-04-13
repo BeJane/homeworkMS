@@ -1,14 +1,14 @@
-<%@ page import="code.model.Student" %>
-<%@ page import="java.util.List" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: wjq
   Date: 2020/3/9
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
   <head>
       <title>作业管理系统(教师版）</title>
@@ -21,7 +21,7 @@
 添加学生
   &nbsp;
 
-  <a href="homework_t.jsp">返回</a>
+  <a href="teacher">返回</a>
 <br>
 <form action="addStudent" method="POST">
     <p class="studentId">
@@ -47,18 +47,19 @@
           <td>姓名</td>
           <td>创建时间</td>
       </tr>
-      <tr align="center" bgcolor="white" height = "30">
-      <c:if test="${not empty list}">
-          <ul>
-              <c:forEach var="student" items="${list}" varStatus="loop">
-      <tr>
-          <td>${student.get("id")}</td>
-          <td>${student.get("name")}</td>
-          <td>${student.get("create_time")}</td>
-      </tr>
-                  </c:forEach>
-          </ul>
-      </c:if>
+
+      <c:forEach var="student" items="${list}" >
+
+          <tr align="center" bgcolor="white" height = "30">
+              <td>${student.get(id)}</td>
+              <td>${student.get(name)}</td>
+
+              <td>${student.get(time)}</td>
+          </tr>
+
+
+      </c:forEach>
+
   </table>
   </body>
 </html>

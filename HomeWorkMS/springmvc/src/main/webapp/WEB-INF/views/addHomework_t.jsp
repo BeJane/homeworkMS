@@ -1,15 +1,15 @@
-
+<%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: wjq
   Date: 2020/3/9
 
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
   <head>
     <title>作业管理系统（教师版）</title>
-      <link rel="stylesheet" href="../../../../../../web/src/main/webapp/css/demo.css" type="text/css" media="all" />
+      <link rel="stylesheet" href="css/demo.css" type="text/css" media="all" />
   </head>
   <body align = "center">
   作业管理系统（教师版）

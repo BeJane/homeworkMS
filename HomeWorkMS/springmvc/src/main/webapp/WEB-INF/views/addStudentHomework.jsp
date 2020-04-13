@@ -1,4 +1,4 @@
-
+<%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: wjq
@@ -6,11 +6,11 @@
   Time: 21:12
   学生提交作业
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
   <head>
     <title>提交作业</title>
-      <link rel="stylesheet" href="../../../../../../web/src/main/webapp/css/demo.css" type="text/css" media="all" />
+      <link rel="stylesheet" href="css/demo.css" type="text/css" media="all" />
   </head>
   <body align="center">
   提交作业
@@ -19,7 +19,7 @@
 <form action="/addStudentHomework" align="left" method="POST">
     <p class="homework_id">
         <label >作业编号</label>
-         <input type="text" name="id" readonly value="<%=request.getParameter("id")%>">
+         <input type="text" name="id" readonly value="${homework_Id}">
     </p>
     <p class="s_id">
         <label>学生学号</label>

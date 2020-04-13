@@ -1,7 +1,5 @@
-
-<%@ page import="java.util.List" %>
-<%@ page import="code.model.Homework" %>
-<%@ page import="code.jdbc.HomeworkJdbc" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: wjq
@@ -9,7 +7,7 @@
   Time: 21:12
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
   <head>
@@ -18,13 +16,13 @@
   <body align="center" >
 作业管理系统(教师版)
 &nbsp;&nbsp;
-<a href="homework">切换学生版</a>
+<a href="asStudent">切换学生版</a>
 <br>
 <br>
 
 <a href="addHomework">添加作业</a>
 &nbsp;
-<a href="addStudent">添加学生</a>
+<a href="student">添加学生</a>
 <br>
 <br>
     <table align="center" width="960" border="1"
@@ -37,28 +35,17 @@
             <td>创建时间</td>
             <td>操作</td>
         </tr>
-        <%
-            HomeworkJdbc homeworkJdbc = new HomeworkJdbc();
-            List<Homework> list = homeworkJdbc.selectAll();
-            homeworkJdbc.free();
-            if(null == list || list.size() <= 0){
-                out.print("None data");
-            }else{
-                for(Homework hw : list){
+        <c:forEach var="entry" items="${list}" >
 
-        %>
         <tr align="center" bgcolor="white" height = "30">
-            <td><%=hw.getId()%></td>
-            <td><%=hw.getTitle()%></td>
-            <td><%=hw.getContent()%></td>
-            <td><%=hw.getCreateTime()%></td>
-            <td><a href="studentHomework?id=<%=hw.getId()%>">查看</a></td>
+            <td>${entry.get(id)}</td>
+            <td>${entry.get(title)}</td>
+            <td>${entry.get(content)}</td>
+            <td>${entry.get(time)}</td>
+            <td><a href="studentHomework?id=${entry.get(id)}">查看</a></td>
 
         </tr>
-        <%
-                }
-            }
-        %>
+        </c:forEach>
     </table>
   </body>
 </html>

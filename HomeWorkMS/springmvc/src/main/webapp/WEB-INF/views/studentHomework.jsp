@@ -1,27 +1,27 @@
-<%@ page import="code.model.StudentHomework" %>
-<%@ page import="java.util.List" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: wjq
-  Date: 2020/3/9
+  Date: 2020/3/9 java
+  Update: 2020/4/13 EL
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>作业管理系统(教师版）</title>
-    <link rel="stylesheet" href="../../../../../../web/src/main/webapp/css/demo.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/demo.css" type="text/css" media="all" />
 </head>
 <body align="center" >
 作业管理系统(教师版)
 &nbsp;&nbsp;&nbsp;
-<a href="homework_t.jsp">返回</a>
+<a href="teacher">返回</a>
 <br>
 <br>
-<form action="/studentHomework" align="left" method="POST">
+<form action="searchStudentHomework" align="left" method="POST">
     <p class="homework_id">
         <label >作业编号</label>
-        <input type="text" name="homeworkId"  value="<%=request.getParameter("id")%>">
+        <input type="text" name="homeworkId"  value="${homework_Id}">
     </p>
     <p class="s_id">
         <label>学生学号</label>
@@ -45,25 +45,18 @@
         <td>作业内容</td>
         <td>创建时间</td>
     </tr>
-    <%
-        List<StudentHomework> list = (List<StudentHomework>) request.getAttribute("list");
-        if(null == list || list.size() <= 0){
-            out.print("None data.");
-        }else {
-            for (StudentHomework sh : list){
-    %>
-    <tr align="center" bgcolor="white" height="30">
-        <td><%=sh.getId()%></td>
-        <td><%=sh.getStudentId()%></td>
-        <td><%=sh.getHomeworkId()%></td>
-        <td><%=sh.getHomeworkTitle()%></td>
-        <td><%=sh.getHomeworkContent()%></td>
-        <td><%=sh.getCreateTime()%></td>
-    </tr>
-    <%
-            }
-        }
-    %>
+    <c:forEach var="entry" items="${list}" >
+        <tr align="center" bgcolor="white" height = "30">
+
+            <td>${entry.get(id)}</td>
+            <td>${entry.get(student_id)}</td>
+            <td>${homework_Id}</td>
+            <td>${entry.get(title)}</td>
+            <td>${entry.get(content)}</td>
+            <td>${entry.get(time)}</td>
+
+        </tr>
+    </c:forEach>
 </table>
 </body>
 </html>
