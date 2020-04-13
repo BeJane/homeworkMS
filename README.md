@@ -1,4 +1,4 @@
-## HomeworkMS
+## HomeWorkMS
 maven: projec/module
 ## JavaEE_test1
 servlet+jdbc+jsp
