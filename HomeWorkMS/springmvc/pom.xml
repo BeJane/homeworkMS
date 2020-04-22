@@ -18,7 +18,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+
+    <aspectj.version>1.9.1</aspectj.version>
   </properties>
+
 
   <dependencies>
 
@@ -95,6 +98,23 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
       <version>${springframework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>jsr250-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <!--使用AspectJ方式注解需要相应的包-->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.geronimo.bundles</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.6.8_2</version>
     </dependency>
 
   </dependencies>
