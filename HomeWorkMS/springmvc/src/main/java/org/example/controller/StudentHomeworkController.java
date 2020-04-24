@@ -1,18 +1,12 @@
 package org.example.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.example.context.SpringContextUtil;
+import org.example.service.StudentHomeworkService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Map;
-
 
 /**
  * 控制器
@@ -24,44 +18,43 @@ import java.util.Map;
 
 public class StudentHomeworkController {
 
-    private ModelAndView mv = new ModelAndView();
-
-
+    /**
+     * 老师查看学生作业
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "studentHomework", method = RequestMethod.GET)
     public ModelAndView studentHomework(@RequestParam("id") Long id) {
-        String sqlString = "SELECT * FROM s_student_homework WHERE homework_id = ?";
+        StudentHomeworkService studentHomeworkService = (StudentHomeworkService)
+                SpringContextUtil.getBean("studentHomeworkServiceImpl");
+
+        ModelAndView mv = studentHomeworkService.select(id);
 
         //要跳转的页面
         mv.setViewName("studentHomework");
-        setMv();
-
-        List<Map<String, Object>> list
-                = jdbcTemplate.queryForList(sqlString,new Object[]{id});
-        System.out.println(list);
-        mv.addObject("list", list);
-
-        mv.addObject("homework_Id",id);
         return mv;
     }
 
 
+    /**
+     * @param homeworkId
+     * @param studentId
+     * @return
+     */
     @RequestMapping(value="searchStudentHomework", method=RequestMethod.POST)
-    private ModelAndView searchStudentHomework(@RequestParam("homeworkId") Long homeworkId,
-                              @RequestParam("studentId") Long studentId){
+    private ModelAndView searchStudentHomework
+            (@RequestParam("homeworkId") Long homeworkId,
+             @RequestParam("studentId") Long studentId){
+
+        StudentHomeworkService studentHomeworkService = (StudentHomeworkService)
+                SpringContextUtil.getBean("studentHomeworkServiceImpl");
+
+        ModelAndView mv = studentHomeworkService.select(homeworkId,studentId);
 
         //要跳转的页面
         mv.setViewName("studentHomework");
-        setMv();
 
-        String sqlString =
-                "SELECT * FROM s_student_homework WHERE homework_id=? and student_id=?";
-        List<Map<String, Object>> list
-                = jdbcTemplate.queryForList(sqlString,new Object[]{homeworkId,studentId});
-        System.out.println("教师查询学生作业"+list);
-        mv.addObject("list", list);
-
-        mv.addObject("homework_Id",homeworkId);
-        return mv;
+         return mv;
     }
 
     /**
@@ -70,9 +63,12 @@ public class StudentHomeworkController {
     @RequestMapping(value = "addStudentHomework", method=RequestMethod.GET)
     public ModelAndView addStudentHomework(@RequestParam("id") Long homeworkId) {
 
+        StudentHomeworkService studentHomeworkService = (StudentHomeworkService)
+                SpringContextUtil.getBean("studentHomeworkServiceImpl");
+
+        ModelAndView mv = studentHomeworkService.getModelAndView();
         //要跳转的页面
         mv.setViewName("addStudentHomework");
-        setMv();
         mv.addObject("homework_Id",homeworkId);
         return mv;
     }
@@ -83,12 +79,12 @@ public class StudentHomeworkController {
                                            @RequestParam("title") String title,
                                            @RequestParam("content") String content) {
 
-        String sqlString =
-                "INSERT INTO s_student_homework" +
-                        " (student_id,homework_id,homework_title,homework_content,create_time) VALUES (?,?,?,?,NOW())";
-        int rows = jdbcTemplate.update(sqlString,
-                new Object[]{studentId,homeworkId,title,content});
-        System.out.println("学生提交作业 "+rows);
+        StudentHomeworkService studentHomeworkService = (StudentHomeworkService)
+                SpringContextUtil.getBean("studentHomeworkServiceImpl");
+
+        studentHomeworkService.addStudentHomework(homeworkId,studentId,title,content);
+
+
         return "redirect:asStudent";
     }
 

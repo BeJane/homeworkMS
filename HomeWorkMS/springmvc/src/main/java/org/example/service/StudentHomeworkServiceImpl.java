@@ -13,7 +13,7 @@ import java.util.Map;
  * @author wjq
  */
 @Service
-public class StudentHomeworkServiceImpl implements MyService {
+public class StudentHomeworkServiceImpl implements StudentHomeworkService {
     private JdbcTemplate jdbcTemplate =
             SpringContextUtil.getBean("jdbcTemplate");
 
@@ -25,7 +25,7 @@ public class StudentHomeworkServiceImpl implements MyService {
     }
 
     @Override
-    public String setModelAndView() {
+    public ModelAndView getModelAndView() {
 
 
         mv.addObject("id","id");
@@ -35,27 +35,48 @@ public class StudentHomeworkServiceImpl implements MyService {
         mv.addObject("content","homework_content");
         mv.addObject("time","create_time");
 
-        return "初始化ModelAndView";
+        return mv;
     }
 
     @Override
-    public String add(Long id, String name){
+    public String addStudentHomework(Long homeworkId, Long studentId, String title, String content) {
         String sqlString =
-                "INSERT INTO s_student (id,name,create_time) VALUES (?,?,NOW())";
-        int rows = jdbcTemplate.update(sqlString,new Object[]{id,name});
-        return "添加学生"+name;
+                "INSERT INTO s_student_homework" +
+                        " (student_id,homework_id,homework_title,homework_content,create_time) VALUES (?,?,?,?,NOW())";
+        int rows = jdbcTemplate.update(sqlString,
+                new Object[]{studentId,homeworkId,title,content});
+        return "学生提交一份作业";
     }
+
     @Override
-    public ModelAndView selectAll() {
+    public ModelAndView select(Long homeworkId) {
 
-        String sqlString = "SELECT * FROM s_student";
 
-        List<Map<String, Object>> students = jdbcTemplate.queryForList(sqlString);
+        String sqlString = "SELECT * FROM s_student_homework WHERE homework_id = ?";
 
-        setModelAndView();
-        //要跳转的页面
-        mv.setViewName("addStudent_t");
-        mv.addObject("list", students);
+
+        List<Map<String, Object>> studentHomework
+                = jdbcTemplate.queryForList(sqlString,new Object[]{homeworkId});
+
+        getModelAndView();
+
+        mv.addObject("list", studentHomework);
+
+        mv.addObject("homework_Id",homeworkId);
+        return mv;
+    }
+
+    @Override
+    public ModelAndView select(Long homeworkId, Long studentId) {
+        String sqlString =
+                "SELECT * FROM s_student_homework WHERE homework_id=? and student_id=?";
+        List<Map<String, Object>> list
+                = jdbcTemplate.queryForList(sqlString,new Object[]{homeworkId,studentId});
+
+        mv.addObject("list", list);
+
+        mv.addObject("homework_Id",homeworkId);
+
         return mv;
     }
 }

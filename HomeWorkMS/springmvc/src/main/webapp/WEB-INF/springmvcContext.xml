@@ -39,8 +39,12 @@
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
 
+    <bean id = "homeworkServiceImpl" class="org.example.service.HomeworkServiceImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
 
-    <bean id="studentHomeworkServiceImpl" class="org.example.service.StudentHomeworkServiceImpl">
+    <bean id="studentHomeworkServiceImpl"
+          class="org.example.service.StudentHomeworkServiceImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
 

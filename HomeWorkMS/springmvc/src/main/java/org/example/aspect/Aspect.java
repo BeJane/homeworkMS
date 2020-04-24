@@ -13,7 +13,7 @@ public class Aspect {
      *  all the methods available. So advice will be called
      *  for all the methods.
      */
-    @Pointcut("execution(* org.example.context.*.*(..))")
+    @Pointcut("execution(* org.example.service.*.*(..))")
     private void selectAll(){}
     /**
      * This is the method which I would like to execute

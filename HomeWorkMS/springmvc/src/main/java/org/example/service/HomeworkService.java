@@ -9,16 +9,27 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public interface HomeworkService {
 
-    public String setJdbcTemplate(JdbcTemplate jdbcTemplate);
     /**
-     * This is the method to be used to create
-     * a record in the Student and Marks tables.
+     * @param jdbcTemplate
      */
-    public String setModelAndView();
-    public String add(Long id, String name);
+    void setJdbcTemplate(JdbcTemplate jdbcTemplate);
     /**
-     * This is the method to be used to list down
-     * all the records from the Student and Marks tables.
+     * This is the method to be used to set the ModelAndView
+     * @return
      */
-    public ModelAndView selectAll();
+    ModelAndView getModelAndView();
+
+    /**
+     * 老师发布作业
+     * @param title
+     * @param content
+     * @return
+     */
+    String addHomework(String title,String content);
+    /**
+     *  This is the method to be used to list down all homework
+     * @return
+     */
+    ModelAndView select();
+
 }

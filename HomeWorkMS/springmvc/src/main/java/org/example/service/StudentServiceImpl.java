@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author wjq
  */
 @Service
-public class StudentServiceImpl implements MyService {
+public class StudentServiceImpl implements StudentService {
     private JdbcTemplate jdbcTemplate =
             SpringContextUtil.getBean("jdbcTemplate");
 
@@ -34,7 +34,7 @@ public class StudentServiceImpl implements MyService {
     }
 
     @Override
-    public String addStudent(Long id, String name){
+    public String add(Long id, String name){
         String sqlString =
                 "INSERT INTO s_student (id,name,create_time) VALUES (?,?,NOW())";
         int rows = jdbcTemplate.update(sqlString,new Object[]{id,name});
@@ -50,11 +50,6 @@ public class StudentServiceImpl implements MyService {
         setModelAndView();
         mv.addObject("list", students);
         return mv;
-    }
-
-    @Override
-    public ModelAndView select(Object object) {
-        return null;
     }
 
 }

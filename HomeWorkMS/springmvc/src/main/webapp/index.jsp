@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>作业管理系统(学生版）</title>
+    <title>作业管理系统</title>
 </head>
 <body align="center" >
 <br><br>

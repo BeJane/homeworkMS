@@ -1,34 +1,34 @@
 package org.example.service;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.example.dao.StudentDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 
-@Service
-public class StudentService implements StudentDAO {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+/**
+ * @author:Jingqi Wu
+ * @date: 2020/4/23
+ */
+public interface StudentService {
 
-    @Override
-    public void create(Long id, String name){
-        String sqlString =
-                "INSERT INTO s_student (id,name,create_time) VALUES (?,?,NOW())";
-        int rows = jdbcTemplate.update(sqlString,new Object[]{id,name});
-        System.out.println("添加学生 "+rows);
-    }
-    @Override
-    public List<Map<String, Object>> listStudents() {
+    /**
+     * @param jdbcTemplate
+     */
+    void setJdbcTemplate(JdbcTemplate jdbcTemplate);
+    /**
+     * This is the method to be used to set the ModelAndView
+     * @return
+     */
+    String setModelAndView();
 
-        String sqlString = "SELECT * FROM s_student";
+    /**
+     * @param id
+     * @param name
+     * @return
+     */
+    String add(Long id, String name);
+    /**
+     *  This is the method to be used to list down all the records
+     * @return
+     */
+    ModelAndView selectAll();
 
-        List<Map<String, Object>> students = jdbcTemplate.queryForList(sqlString);
-        System.out.println(students.get(1).toString());
-        return students;
-    }
 }
