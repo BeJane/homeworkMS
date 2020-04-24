@@ -1,15 +1,10 @@
 package org.example.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -23,24 +18,8 @@ import java.util.Map;
 
 public class HomeworkController {
 
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     private ModelAndView mv = new ModelAndView();
 
-    public void setMv(){
-
-        String sqlString = "SELECT * FROM s_homework";
-
-        List<Map<String, Object>> list = jdbcTemplate.queryForList(sqlString);
-        System.out.println(list);
-        mv.addObject("list", list);
-        mv.addObject("id","id");
-        mv.addObject("title","title");
-        mv.addObject("content","content");
-
-        mv.addObject("time","create_time");
-    }
 
     /**
      * 教师首页，查看已发布作业列表
@@ -51,7 +30,6 @@ public class HomeworkController {
 
         //要跳转的页面
         mv.setViewName("homework_t");
-        setMv();
 
         return mv;
     }
@@ -69,8 +47,8 @@ public class HomeworkController {
 
         String sqlString =
                 "INSERT INTO s_homework (title,content,create_time) VALUES (?,?,NOW())";
-            int rows = jdbcTemplate.update(sqlString,new Object[]{title,content});
-        System.out.println("教师发布作业 "+rows);
+            //int rows = jdbcTemplate.update(sqlString,new Object[]{title,content});
+        //System.out.println("教师发布作业 "+rows);
         return "redirect:teacher";
     }
 
@@ -84,7 +62,7 @@ public class HomeworkController {
 
         //要跳转的页面
         mv.setViewName("homework_s");
-        setMv();
+        //setMv();
 
         return mv;
     }

@@ -10,6 +10,7 @@ import java.util.Date;
 public class Student {
     private long id;
     private String name;
+
     private Date createTime;
     private Date updateTime;
 
@@ -20,6 +21,8 @@ public class Student {
     public void setId(long id) {
         this.id = id;
     }
+
+
 
     public String getName() {
         return name;
@@ -44,6 +47,14 @@ public class Student {
 
     public void setUpdateTime(Date update_time) {
 
-        this.updateTime = (Date)update_time.clone();
+        this.updateTime = (Date) update_time.clone();
     }
+
+/*
+    public void printThrowException(){
+        System.out.println("Exception raised");
+        throw new IllegalArgumentException();
+    }
+
+ */
 }

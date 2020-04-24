@@ -24,19 +24,8 @@ import java.util.Map;
 
 public class StudentHomeworkController {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     private ModelAndView mv = new ModelAndView();
 
-    public void setMv(){
-
-        mv.addObject("id","id");
-        mv.addObject("student_id","student_id");
-
-        mv.addObject("title","homework_title");
-        mv.addObject("content","homework_content");
-        mv.addObject("time","create_time");
-    }
 
     @RequestMapping(value = "studentHomework", method = RequestMethod.GET)
     public ModelAndView studentHomework(@RequestParam("id") Long id) {

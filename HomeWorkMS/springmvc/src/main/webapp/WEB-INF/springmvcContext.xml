@@ -18,6 +18,11 @@
     </bean>
     <context:property-placeholder location="/WEB-INF/db.properties"/>
 
+    <!-- 可通过SpringContextUtil获取Spring容器中的任何bean
+ 在根据SpringServlet.xml初始化上下文时，会自动调用setApplicationContext()方法去获取ApplicationContext
+  -->
+    <bean id="springContextUtil" class="org.example.context.SpringContextUtil"></bean>
+
     <bean id="dataSource"
           class="org.apache.commons.dbcp2.BasicDataSource" >
     <property name="username" value="${jdbc.user}"></property>
@@ -30,10 +35,17 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <bean id="studentService" class="org.example.service.StudentService">
+    <bean id="studentServiceImpl" class="org.example.service.StudentServiceImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+
+    <bean id="studentHomeworkServiceImpl" class="org.example.service.StudentHomeworkServiceImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
 
     <bean id="testAspect" class="org.example.aspect.Aspect">
         <!-- configure properties of aspect here as normal -->
     </bean>
+
 </beans>

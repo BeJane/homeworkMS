@@ -1,4 +1,7 @@
-body { padding:5px 100px; font:20px/150% Verdana, Tahoma, sans-serif; }
+body { padding:5px 100px; font:20px/150% Verdana, Tahoma, sans-serif;
+    background-image:url('star.jpg');
+    background-repeat:no-repeat;
+}
 
 /* tutorial */
 

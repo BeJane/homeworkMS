@@ -13,7 +13,7 @@ public class Aspect {
      *  all the methods available. So advice will be called
      *  for all the methods.
      */
-    @Pointcut("execution(* org.example.service.*.*(..))")
+    @Pointcut("execution(* org.example.context.*.*(..))")
     private void selectAll(){}
     /**
      * This is the method which I would like to execute
@@ -37,6 +37,7 @@ public class Aspect {
      */
     @AfterReturning(pointcut = "selectAll()", returning="retVal")
     public void afterReturningAdvice(Object retVal){
+
         System.out.println("Returning:" + retVal.toString() );
     }
     /**
