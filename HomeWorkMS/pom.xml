@@ -16,7 +16,7 @@
     </modules>
 
     <properties>
-        <springframework.version>4.0.6.RELEASE</springframework.version>
+        <springframework.version>5.3.18</springframework.version>
     </properties>
     <dependencies>
         <!-- 解决编译时，报程序包javax.servlet不存在的错误 -->
